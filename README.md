@@ -597,8 +597,7 @@ matplotlip.pyplot.savefig('inflammation.png')
 matplotlib.pyplot.show()
 
                                           
-## Storing value in lists
- In this section, we explored storing values in list using python commands
+ 
 
 ```python
 odds = [1, 3, 5, 7]
@@ -608,7 +607,8 @@ print('odds are:', odds)
 
     odds are: [1, 3, 5, 7]
 
-
+## Storing Values in Lists 
+In this section we explored how to store values in list using python commands 
 
 ```python
 
