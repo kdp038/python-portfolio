@@ -143,7 +143,147 @@ fig.tight_layout()
 ```python
 import numpy
 ```
-## analyzing patient data
+
+## Python Fundamentals
+This section was used to get us familiar with some of the commands of python 
+```python
+# any python interpreter can be used as a calculator 
+3 + 5 * 4 
+```
+
+
+
+
+    23
+
+
+
+
+```python
+# Lets save a value to a variable
+weight_kg = 60 
+```
+
+
+```python
+print(weight_kg)
+```
+
+    60
+
+
+
+```python
+# Weight0 = valid 
+# 0weight = invalid
+# weight and Weight are different 
+```
+
+
+```python
+# Types of data 
+# There are three common types of data
+# Intergers
+# Floating point numbers 
+# Strings
+
+```
+
+
+```python
+# Floating point number 
+weight_kg = 60.3
+
+```
+
+
+```python
+# String comprised of Letters 
+patient_name = "John Smith"
+```
+
+
+```python
+# String comprised of numbers 
+patient_id = '001'
+```
+
+
+```python
+# Use variables in python 
+
+weight_lb = 2.2 * weight_kg
+print(weight_lb)
+```
+
+    132.66
+
+
+
+```python
+# Lets add a prefix to our patient id 
+
+patient_id = 'inflam_' + patient_id
+
+print (patient_id)
+
+```
+
+    inflam_001
+
+
+
+```python
+# Lets combine print statments 
+print (patient_id, 'weight in kilograms:', weight_kg)
+```
+
+    inflam_001 weight in kilograms: 60.3
+
+
+
+```python
+# we can calla function inside another function
+print (type(60.3))
+
+print(type(patient_id))
+```
+
+    <class 'float'>
+    <class 'str'>
+
+
+
+```python
+# We can also do calculations inside the print functions 
+
+print('weight in lbs:', 2.2 * weight_kg)
+```
+
+    weight in lbs: 132.66
+
+
+
+```python
+print(weight_kg)
+```
+
+    60.3
+
+
+
+```python
+weight_kg = 65.0
+print('weight in kilograms is now:', weight_kg)
+```
+
+    weight in kilograms is now: 65.0
+
+
+
+
+
+## Analyzing patient data 1,2 and 3
 In this analysis, we looked at inflammation data for multiple patients 
 ```python
 numpy.loadtxt(fname = 'inflammation-01.csv', delimiter = ',')
@@ -400,7 +540,61 @@ print(numpy.mean(data, axis = 1))
      5.95  6.275 5.7   6.1   6.825 5.975 6.725 5.7   6.25  6.4   7.05  5.9  ]
 
 
+```python
+import numpy
+data = numpy.loadtxt(fname= 'inflammation-01.csv', delimiter = ',')
+```
+
 
 ```python
-
+# Heat map of patient inflammation over time 
+import matplotlib.pyplot
+image = matplotlib.pyplot.imshow(data)
+matplotlib.pyplot.show()
 ```
+
+
+```python
+# Average inflammation over time 
+
+ave_inflammation = numpy.mean (data, axis = 0)
+ave_plot = matplotlib.pyplot.plot(ave_inflammation)
+matplotlib.pylot.show()
+```
+
+
+```python
+max_plot = matplotlib.pyplot.plot(numpy.amax(data, axis = 0))
+matplotlib.pyplot.show()
+```
+
+
+```python
+min_plot = matplotlib.pyplot.plot(numpy.amin(data, axis = 0))
+matplotlib.pyplot.show()
+```
+
+
+```python
+fig = matplotlib.pyplot.figure(figsize = (10.0, 3.0))
+
+axes1 = fig.add_subplot(1, 3, 1)
+axes2 = fig.add_subplot(1, 3, 2)
+axes3 = fig.add_subplot(1, 3, 3)
+
+axes1.set_ylabel('average')
+axes1.plot(numpy.mean(data, axis = 0))
+
+axes2.set_ylabel('max')
+axes2.plot(numpy.amax(data, axis = 0))
+
+axes3.set_ylabel('min')
+axes3.plot(numpy.amin(data, axis = 0))
+
+fig.tight_layout()
+
+matplotlip.pyplot.savefig('inflammation.png')
+matplotlib.pyplot.show()
+
+
+
