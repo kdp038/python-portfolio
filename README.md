@@ -1398,8 +1398,8 @@ numpy.loadtxt('inflammation-01.csv', delimiter = ',')
 
 ```
 
-##Defensive Programm 
-In this section we explore what defensive programming is and some techniques that can be used in python 
+## Defensive Programming 
+In this section, we explore what defensive programming is and some techniques that can be used in python 
 
 ```python
 numbers = [1.5, 2.3, 0.7, -0.001, 4.4]
