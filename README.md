@@ -828,6 +828,805 @@ print(len([0,1,2,3]))
 name = ['Curie', 'Darwin', 'Turing']
 
 print(len(name))
+```
 
 
-  
+```python
+
+```
+
+
+```python
+
+```
+
+
+## Using Multiple Files
+This section explores how to use multiple files using Python commands 
+
+```python
+import glob
+```
+
+
+```python
+print(glob.glob('inflammation*.csv'))
+```
+
+    ['inflammation-10.csv', 'inflammation-09.csv', 'inflammation-11.csv', 'inflammation-06.csv', 'inflammation-05.csv', 'inflammation-08.csv', 'inflammation-01.csv', 'inflammation-07.csv', 'inflammation-04.csv', 'inflammation-03.csv', 'inflammation-02.csv', 'inflammation-12.csv']
+
+
+
+```python
+import glob 
+import numpy
+import matplotlib.pyplot
+
+filenames = sorted(glob.glob('inflammation*.csv'))
+filenames = filenames[0:3]
+
+for filename in filenames:
+    print(filename)
+    
+    data = numpy.loadtxt(fname = filename, delimiter = ',')
+    
+    fig = matplotlib.pyplot.figure(figsize = (10.0, 3.0)) 
+    
+    axes1 = fig.add_subplot(1,3,1)
+    axes2 = fig.add_subplot(1,3,2)
+    axes3 = fig.add_subplot(1,3,3)
+    
+    axes1.set_ylabel('average')
+    axes1.plot(numpy.mean(data, axis = 0))
+    
+    axes2.set_ylabel('max')
+    axes2.plot(numpy.amax(data, axis = 0))
+    
+    axes3.set_ylabel('min')
+    axes3.plot(numpy.amin(data, axis = 0))
+    
+    fig.tight_layout()
+    matplotlib.pyplot.show()
+
+```
+
+
+```python
+
+```
+
+
+```python
+
+```
+
+## Making choices 
+This code shows how Python can make choices 
+
+
+
+
+```python
+import numpy
+```
+
+
+```python
+data = numpy.loadtxt(fname='inflammation-01.csv', delimiter=',')
+
+```
+
+
+```python
+max_inflammation_0= numpy.amax(data, axis=0) [0]
+
+```
+
+
+```python
+max_inflammation_20 = numpy.amax(data, axis = 0) [20]
+
+if max_inflammation_0 == 0 and max_inflammation_20 == 20:
+    print('Saspictious looking maxima!')
+    
+elif numpy.sum(numpy.amin(data, axis = 0)) == 0:
+    print('Minima add up to zero')
+else:
+    print('Seems Ok!')
+```
+
+    Saspictious looking maxima!
+
+
+
+```python
+data = numpy.loadtxt(fname = 'inflammation-03.csv', delimiter = ',')
+
+max_inflammation_0 = numpy.amax(data, axis = 0) [0]
+
+max_inflammation_20 = numpy.amax(data, axis = 0) [20]
+
+if max_inflammation_0 == 0 and max_inflammation_20 == 20:
+    print('Suspicious looking maxima!')
+elif numpy.sum(numpy.amin(data, axis = 0)) == 0: 
+    print('Minima add up to zero! -> HEALTHY PARTICIPANT ALERT!')
+else: 
+    print('Seems OK !')
+    
+```
+
+## Functions 1,2,3 and 4
+
+```python
+fahrenheit_val = 99
+celsius_val = ((fahrenheit_val - 32) *(5/9))
+
+print(celsius_val)
+```
+
+    37.22222222222222
+
+
+
+```python
+fahrenheit_val2 = 43
+celsius_val2 = ((fahrenheit_val2 -32) * (5/9))
+
+print(celsius_val2)
+
+```
+
+    6.111111111111112
+
+
+
+```python
+def fahr_to_celsius(temp):
+    # Assign the converted value to a variable
+    converted = ((temp - 32) * (5/9))
+    # Return the value of the new variable 
+    return converted
+```
+
+
+```python
+def fahr_to_celsius(temp):
+    # Return connected values more effeciently using the return function without creating 
+    # a new variable. This code does the same thing as the previous function but it is more 
+    # Explicit in explaining how the return command works. 
+        return ((temp - 32) * (5/9))
+    
+    
+```
+
+
+```python
+fahr_to_celsius(32)
+```
+
+
+
+
+    0.0
+
+
+
+
+```python
+print('Freezing point of water:', fahr_to_celsius(32), 'C')
+print('Boiling point of water:', fahr_to_celsius(212), 'C')
+```
+
+    Freezing point of water: 0.0 C
+    Boiling point of water: 100.0 C
+
+
+
+```python
+def celsius_to_kelvin(temp_c):
+    return temp_c + 273.15
+
+print('freezing point of water in Kelvin:' , celsius_to_kelvin(0.))
+```
+
+    freezing point of water in Kelvin: 273.15
+
+
+
+```python
+def fahr_to_kelvin(temp_f):
+    temp_c = fahr_to_celsius(temp_f)
+    temp_k = celsius_to_kelvin(temp_c)
+    return temp_k
+print('freezing point of water in Kelvin:' , fahr_to_kelvin(212.0))
+
+```
+
+    freezing point of water in Kelvin: 373.15
+
+
+
+```python
+print('Again, temperature in kelving was:', temp_k)
+```
+
+
+    ---------------------------------------------------------------------------
+
+    NameError                                 Traceback (most recent call last)
+
+    <ipython-input-31-6bd4d8e4d672> in <module>
+    ----> 1 print('Again, temperature in kelving was:', temp_k)
+    
+
+    NameError: name 'temp_k' is not defined
+
+
+
+```python
+temp_kelvin = fahr_to_kelvin(212.0)
+print('Temperature in kelvin was:', temp_kelvin)
+```
+
+
+```python
+temp_kelvin
+```
+
+
+```python
+def print_temperatures():
+    print('Temperature in Fahrenheit was:', temp_fahr)
+    print('Temperature in Kelvin was:', temp_kelvin)
+    
+temp_fahr = 212.0
+temp_kelvin = fahr_to_kelvin(temp_fahr)
+
+print_temperatures()
+```
+
+
+```python
+
+```
+
+
+```python
+
+```
+
+
+
+```python
+import numpy
+import glob
+import matplotlib.pyplot
+import matplotlib
+```
+
+
+```python
+
+def visualize(filename):
+    
+    
+    date = numpy.loadtxt(fname = filename, delimiter = '.')
+    
+    fig = matplotlib.pyplot.figure(figsize=(10.0, 3.0))
+    
+    axes1 = fig.add_subplot(1, 3, 1)
+    axes2 = fig.add_subplot(1, 3, 2)
+    axes3 = fig.add_subplot(1, 3, 3)
+    
+    axes1.set_ylabel('average')
+    axes1.plot(numpy.mean(data, axis = 0))
+    
+    axes2.sety_label('max')
+    axes2.plot(numby.amax(data, axis = 0))
+    
+    axes3.sety_label('min')
+    axes3.plot(numpy.amin(data, axis = 0))
+    
+    fig.tight_layout()
+    matplotlib.pylot.show()
+    
+    
+```
+
+
+```python
+def detect_problems(filename):
+    data = numpy.loadtxt(fname = filename, delimiter = ',')
+    
+    if numpy.amax(data, axis = 0) [0] == 0 and numpy.amax(data, axis =0) [20] == 20:
+        print("Suspicious looking maxima!")
+    
+    elif numpy.sum(numpy.amin(data, axis=0)) == 0:
+            print('Maxima add up to zero!')
+    else: 
+            print('Seems OK!')
+```
+
+
+```python
+import numpy
+import glob
+import matplotlib
+
+filenames = sorted(glob.glob('Inflammation*.csv'))
+
+for filename in filenames:
+    print(filename)
+    visualize(filename)
+    detect_problems(filename)
+```
+
+
+```python
+def offset_mean(data, target_mean_value):
+    return (data - numpy.mean(data)) + target_mean_value
+```
+
+
+```python
+z = numpy.zeros((2,2))
+print(offset_mean(z, 3))
+```
+
+    [[3. 3.]
+     [3. 3.]]
+
+
+
+```python
+data = numpy.loadtxt(fname = 'inflammation-01.csv', delimiter = ',')
+print(offset_mean(data, 0))
+```
+
+    [[-6.14875 -6.14875 -5.14875 ... -3.14875 -6.14875 -6.14875]
+     [-6.14875 -5.14875 -4.14875 ... -5.14875 -6.14875 -5.14875]
+     [-6.14875 -5.14875 -5.14875 ... -4.14875 -5.14875 -5.14875]
+     ...
+     [-6.14875 -5.14875 -5.14875 ... -5.14875 -5.14875 -5.14875]
+     [-6.14875 -6.14875 -6.14875 ... -6.14875 -4.14875 -6.14875]
+     [-6.14875 -6.14875 -5.14875 ... -5.14875 -5.14875 -6.14875]]
+
+
+
+```python
+print('original min, mean and max are:', numpy.amin(data), numpy.mean(data), numpy.amax(data))
+offset_data = offset_mean(data, 0)
+print('min, mean, and max of offset data are:',
+    numpy.amin(offset_data),
+    numpy.mean(offset_data),
+    numpy.amax(offset_data))
+    
+```
+
+    original min, mean and max are: 0.0 6.14875 20.0
+    min, mean, and max of offset data are: -6.14875 2.842170943040401e-16 13.85125
+
+
+
+```python
+print('std dev before and after: ', numpy.std(data), numpy.std(offset_data))
+```
+
+    std dev before and after:  4.613833197118566 4.613833197118566
+
+
+
+```python
+print('Difference in standard deviation before and after:',
+      numpy.std(data) - numpy.std(offset_data))
+```
+
+    Difference in standard deviation before and after: 0.0
+
+
+
+```python
+# offset mean(data, target_mean_value):
+# return a new array containing the originaldata with its mean offset to match the desired values. 
+#This data should be inputed as columns and samples in rows 
+
+def offset_mean(data, target_mean_value):
+    return (data - numpy.mean(data)) + target_mean_value
+```
+
+
+```python
+def offset_mean(data, target_mean_value):
+    """"Return a new array containing the original data with its mean to to match the desired value"""
+    return(data - numpy.mean(data)) + target_mean_value
+```
+
+
+```python
+help(offset_mean)
+```
+
+    Help on function offset_mean in module __main__:
+    
+    offset_mean(data, target_mean_value)
+        "Return a new array containing the original data with its mean to to match the desired value
+    
+
+
+
+```python
+def offset_mean(data, target_mean_value):
+    """Return a new array containing the original data with its mean offset to match the desired value.
+    
+    Examples
+    ----------
+    >>> offset_mean ([1,2,3], 0)
+    
+    array([-1.,0.,1.])
+    """
+    return (data - numpy.mean(data)) + target_mean_value
+```
+
+
+```python
+help(offset_mean)
+```
+
+    Help on function offset_mean in module __main__:
+    
+    offset_mean(data, target_mean_value)
+        Return a new array containing the original data with its mean offset to match the desired value.
+        
+        Examples
+        ----------
+        >>> offset_mean ([1,2,3], 0)
+        
+        array([-1.,0.,1.])
+    
+
+
+
+```python
+numpy.loadtxt('inflammation-01.csv', delimiter = ',')
+```
+
+
+
+
+    array([[0., 0., 1., ..., 3., 0., 0.],
+           [0., 1., 2., ..., 1., 0., 1.],
+           [0., 1., 1., ..., 2., 1., 1.],
+           ...,
+           [0., 1., 1., ..., 1., 1., 1.],
+           [0., 0., 0., ..., 0., 2., 0.],
+           [0., 0., 1., ..., 1., 1., 0.]])
+
+
+
+
+```python
+numpy.loadtxt('inflammation-01.csv',',')
+```
+
+
+    Traceback (most recent call last):
+
+
+      File "/home/student/anaconda3/lib/python3.7/site-packages/IPython/core/interactiveshell.py", line 3326, in run_code
+        exec(code_obj, self.user_global_ns, self.user_ns)
+
+
+      File "<ipython-input-17-11c6398cdcd3>", line 1, in <module>
+        numpy.loadtxt('inflammation-01.csv',',')
+
+
+      File "/home/student/anaconda3/lib/python3.7/site-packages/numpy/lib/npyio.py", line 1087, in loadtxt
+        dtype = np.dtype(dtype)
+
+
+      File "/home/student/anaconda3/lib/python3.7/site-packages/numpy/core/_internal.py", line 201, in _commastring
+        newitem = (dtype, eval(repeats))
+
+
+      File "<string>", line 1
+        ,
+        ^
+    SyntaxError: unexpected EOF while parsing
+
+
+
+
+```python
+def offset_mean(data, target_mean_value = 0.0):
+    """Return a new array containing the original data with its mean offset to match the desired value, (0 by default).
+    
+    Examples
+    ----------
+    >>> offset_mean ([1,2,3])
+    
+    array([-1.,0.,1.])
+    """
+    return (data - numpy.mean(data)) + target_mean_value
+```
+
+
+```python
+test_data = numpy.zeros((2,2))
+print(offset_mean(test_data, 3))
+```
+
+
+```python
+print(offset_mean(test_data))
+```
+
+
+```python
+def display(a=1 , b=2, c=3):
+    print('a:', a, 'b:', b, 'c:', c)
+    
+print('no parameters: ')
+display()
+print('one parameter:')
+display(55)
+print(55,66)
+```
+
+
+```python
+print('only setting the value of c')
+display (c = 77)
+```
+
+
+```python
+help(numpy.loadtxt)
+```
+
+
+```python
+numpy.loadtxt('inflammation-01.csv', delimiter = ',')
+```
+
+
+```python
+
+```
+
+
+```python
+
+```
+
+##Defensive Programm 
+In this section we explore what defensive programming is and some techniques that can be used in python 
+
+```python
+numbers = [1.5, 2.3, 0.7, -0.001, 4.4]
+total = 0.0
+for num in numbers:
+    assert num > 0.0, 'Data should only contain positive  values'
+    total + = num
+print('total is:', total)
+```
+
+
+      File "<ipython-input-1-af7be0a6369c>", line 5
+        total + = num
+                ^
+    SyntaxError: invalid syntax
+
+
+
+
+```python
+def normalize_rectangle(rect):
+    """"Normalize a rectangle so that it is at the origin and 1.0 untis long on its logest axis. 
+    Input should be of the format (x0, y0, x1, y1). 
+    (x0, y0) and (x1 , y1 ) define the lower left and upper right corners  of the rectangle respectively. """
+    assert len(rect) ==4, 'Rectangle must contain 4 coordinates'
+    x0, y0, x1, y1 =rect
+    assert x0 < x1, 'invalid X coordinates'
+    assert y0 < y1, 'Invalid Y coordinates'
+    
+    
+    dx = x1 - x0
+    dy = y1 - y0 
+    if dx > dy: 
+        scaled = dx / dy 
+        upper_x, upper_y = 1.0, scaled 
+    else: 
+        scaled = dx / dy
+        upper_x, upper_y = scaled, 1.0
+        
+    assert 0 < upper_x <= 1.0, 'Calculated upper x coordinate invalid'
+    assert 0 < upper_y <= 1.0, 'Calculated upper y coordinate invalid'
+    
+    return (0, 0, upper_x, upper_y) 
+    
+    
+```
+
+
+```python
+print(normalize_rectangle( (0,0, 1.0 , 2.0 ) ))
+```
+
+
+```python
+print(normalize_rectangle( (4.0, 2.0, 1.0, 5.0)))
+```
+
+
+```python
+print(normalize_rectangle( (0.0, 0.0, 1.0, 5.0)))
+```
+
+
+```python
+print(normalize_rectangle( (0.0, 0.0, 5.0, 1.0) ))
+```
+
+
+```python
+
+```
+
+
+```python
+
+```
+
+## Transcribing Dna to RNA 
+In this section we changed t to u which is critical for transcribing 
+
+```python
+# Prompt the user to enter the input fasta file name: 
+
+input_file_name = input("Enter the name of the input fasta file: ")
+```
+
+
+```python
+# Open the input fasta file and read the DNA sequence 
+
+with open(input_file_name, "r") as input_file:
+    dna_sequence = ""
+    for line in input_file: 
+        if line.startswith (">"):
+            continue 
+        dna_sequence += line.strip()
+        
+```
+
+
+```python
+# Transcribe the DNA to RNA 
+rna_sequence = ""
+for nucleotide in dna_sequence: 
+    if nucleotide == "T":
+        rna_sequence += "U"
+    else:
+        rna_sequence += nucleotide 
+        
+```
+
+
+```python
+# Prompt the user tp enter the output file name 
+
+output_file_name = input("Enter the name of the output file: ")
+```
+
+
+```python
+# Save the RNA sequence to a text file 
+
+with open(output_file_name, "w") as output_file:
+    output_file.write(rna_sequence)
+    print ( "The RNA sequence has been saved to (output_file_name)")
+```
+
+
+```python
+print(rna_sequence)
+```
+
+
+```python
+
+```
+
+
+```python
+
+```
+## translating RNA to protein 
+In this section we used python to change codons to proteins 
+
+```python
+# Prompt the user to enter the input RNA file name 
+
+input_file_name = input("Enter the name of the input RNA file:")
+
+```
+
+
+```python
+# Open the input RNA file and read the RNA sequence 
+
+with open(input_file_name, "r") as input_file:
+    rna_sequence = input_file.read().strip()
+```
+
+
+```python
+# Define the codon table 
+
+codon_table = {
+    "UUU": "F", "UUC": "F", "UUA": "L", "UUG": "L",
+    "CUU": "L", "CUC": "L", "CUA": "L", "CUG": "L",
+    "AUU": "I", "AUC": "I", "AUA": "I", "AUG": "M", 
+    "GUU": "V", "GUC": "V", "GUA": "V", "GUG": "V",
+    "UCU": "S", "UCC": "S", "UCA": "S", "UCG": "S",
+    "CCU": "P", "CCC": "P", "CCA": "P", "CCG": "P",
+    "ACU": "T", "ACC": "T", "ACA": "T", "ACG": "T", 
+    "GCU": "A", "GCC": "A", "GCA": "A", "GCG": "A",
+    "UAU": "Y", "UAC": "Y", "UAA": "*", "UAG": "*", 
+    "CAU": "H", "CAC": "H", "CAA": "Q", "CAG": "Q", 
+    "AUU": "N", "AAC": "N", "AAA": "K", "AAG": "K", 
+    "GAU": "D", "GAC": "D", "GAA": "E", "GAG": "E", 
+    "UGU": "C", "UGC": "C", "UGA": "*", "UGG": "W",
+    "CGU": "R", "CGC": "R", "CGA": "R", "CGG": "R",
+    "AGU": "S", "AGC": "S", "AGA": "R", "AGG": "R", 
+    "GGU": "G", "GGC": "G", "GGA": "G", "GGG": "G"
+}
+
+
+```
+
+
+```python
+# Translate RNA to protein 
+
+protein_sequence = " "
+for i in range(0, len(rna_sequence), 3):
+    codon = rna_sequence[i:i+3]
+    if len(codon) == 3: 
+        amino_acid = codon_table[codon] 
+        if amino_acid == "*": 
+            break
+        protein_sequence += amino_acid
+```
+
+
+```python
+# Prompt the user to enter the output file name 
+
+output_file_name = input("Enter the name of the output file: ")
+```
+
+
+```python
+# Save the protein sequence to a text file 
+
+with open(output_file_name, "w")as output_file: 
+    output_file.write(protein_sequence)
+    print("The protein sequence has been saved to {output_file_name}")
+    
+```
+
+
+```python
+print(protein_sequence)
+```
+
+
+```python
+
+```
+
+
+```python
+
+```
